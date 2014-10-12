@@ -1,0 +1,21 @@
+body {
+  margin: 5px 0 0 5px;
+  width: 800px;
+  font-size: 1.2em;
+}
+
+table.issues {
+  width: 780px;
+}
+
+table.issues a {
+  color: #0000ff;
+}
+
+table.issues .over {
+  background: #ffbbbb;
+}
+
+table.issues .hover {
+  background: #ffffaa;
+}

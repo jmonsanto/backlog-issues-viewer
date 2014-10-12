@@ -1,25 +1,56 @@
 <!doctype html>
-<html>
+<html ng-app="PopupApp">
     <head>
         <meta charset="utf-8">
         <!-- build:css styles/vendor.css -->
         <!-- bower:css -->
+        <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
         <!-- endbower -->
         <!-- endbuild -->
-        <!-- build:css styles/main.css -->
-        <link href="styles/main.css" rel="stylesheet">
+        <!-- build:css styles/popup.css -->
+        <link href="styles/popup.css" rel="stylesheet">
         <!-- endbuild -->
     </head>
-    <body>
-        <h1>'Allo, 'Allo!</h1>
-
+    <body ng-controller="PopupCtrl">
+        <p>
+            {{ (issues | filter:internalFilter).length }} <ng-pluralize count="(issues | filter:internalFilter).length" when="{'one': 'issue.', 'other': 'issues.'}"></ng-pluralize>&nbsp;
+            <input type="text" placeholder="Filter" ng-model="internalFilter" />&nbsp;
+            <a ng-click="openOptionPage()">Setting</a>
+        </p>
+        <table class="issues table table-bordered">
+            <thead>
+            <tr>
+                <th style="width: 15%;">Project</th>
+                <th style="width: 12%;">Status</th>
+                <th style="width: 10%;">Limit</th>
+                <th style="width: 10%;">Assignee</th>
+                <th style="width: 33%;">Summary</th>
+                <th style="width: 20%;">Category</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="issue in issues | filter:internalFilter" ng-class="{over: issue._over, hover: hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false">
+                <td>{{ issue._project.name | truncate:15 }}</td>
+                <td>{{ issue.status.name }}</td>
+                <td>{{ issue.limitDate | date:'yy-MM-dd' }}</td>
+                <td>{{ issue.assignee.name }}</td>
+                <td><a ng-href="{{ issue._permalink }}" target="_blank">{{ issue.summary | truncate:25 }}</td>
+                <td>{{ join(issue.category, 'name') | truncate:15 }}</td>
+            </tr>
+            </tbody>
+        </table>
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
+        <script src="bower_components/angular/angular.min.js"></script>
+        <script src="bower_components/underscore/underscore-min.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
         <!-- build:js scripts/popup.js -->
+        <script src="scripts/globals.js"></script>
         <script src="scripts/popup.js"></script>
+        <script src="scripts/filters/truncate.js"></script>
+        <script src="scripts/controllers/popup/popup.js"></script>
         <!-- endbuild -->
     </body>
 </html>

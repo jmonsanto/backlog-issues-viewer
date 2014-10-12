@@ -1,3 +1,4 @@
 'use strict';
 
-console.log('\'Allo \'Allo! Popup');
+angular
+  .module('PopupApp', ['Filters']);

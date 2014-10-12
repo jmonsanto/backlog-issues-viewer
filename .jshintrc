@@ -19,6 +19,11 @@
   "trailing": true,
   "smarttabs": true,
   "globals" : {
-    "chrome": true
+    "chrome": true,
+    "Globals": true,
+    "angular": true,
+    "_": true,
+    "jQuery": true,
+    "moment": true
   }
 }

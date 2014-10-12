@@ -1,24 +1,85 @@
 <!doctype html>
-<html>
+<html ng-app="OptionsApp">
     <head>
         <!-- build:css styles/vendor.css -->
         <!-- bower:css -->
+        <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
         <!-- endbower -->
         <!-- endbuild -->
-        <!-- build:css styles/main.css -->
-        <link href="styles/main.css" rel="stylesheet">
+        <!-- build:css styles/options.css -->
+        <link href="styles/options.css" rel="stylesheet">
         <!-- endbuild -->
     </head>
-    <body>
-        <h1>'Allo, 'Allo!</h1>
-                
+    <body ng-controller="OptionsCtrl">
+        <h1>IssuesViewer For Backlog Options</h1>
+        <div>
+            <h2>Authentication</h2>
+            <p>
+                <label for="spaceKey">Space:</label>&nbsp;https://<input id="spaceKey" type="text" ng-model="auth.spaceKey" />.backlog.jp
+            </p>
+            <p>
+                <label for="apiKey">API Key:</label>&nbsp;<input id="apiKey" type="text" ng-model="auth.apiKey" />&nbsp;
+                <a href="http://www.backlog.jp/help/usersguide/personal-settings/userguide2378.html" target="_blank">About API Key</a>
+            </p>
+            <p>
+                <button class="btn btn-sm btn-default" ng-click="saveAuth()">Save</button>&nbsp;<span>{{ message.saveAuth }}</span>
+            </p>
+        </div>
+        <hr />
+        <div>
+            <h2>Filter</h2>
+            <table class="table table-bordered">
+                <tbody>
+                <tr>
+                    <th>Projects&nbsp;<a ng-show="myself.id" ng-click="getProjects()">Update</a></th>
+                </tr>
+                <tr>
+                    <td>
+                        <span ng-repeat="project in projects">
+                            <label for="{{ project.projectKey }}">{{ project.name }}</label>
+                            <input type="checkbox" id="{{ project.projectKey }}"
+                                   ng-value="project.id"
+                                   ng-checked="conditions.projectIds.indexOf(project.id) > -1"
+                                   ng-click="toggleProjects(project.id)" />
+                        </span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <table class="table table-bordered">
+                <tbody>
+                <tr>
+                    <th>Conditions</th>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="onlyMyIssues">Only my issues</label>
+                        <input id="onlyMyIssues" type="checkbox" ng-model="conditions.onlyMyIssues" ng-value="1" ng-checked="conditions.onlyMyIssues" />
+                        <label for="withClosed">With closed issues</label>
+                        <input id="withClosed" type="checkbox" ng-model="conditions.withClosed" ng-value="1" ng-checked="conditions.withClosed" />
+                        <label for="showDaysForClosed">Show closed issues</label>
+                        <input id="showDaysForClosed" type="text" ng-model="conditions.showDaysForClosed" />days
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-sm btn-default" ng-click="saveConditions()">Save</button>&nbsp;<span>{{ message.saveConditions }}</span>
+        </div>
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/angular/angular.min.js"></script>
+        <script src="bower_components/underscore/underscore-min.js"></script>
+        <script src="bower_components/underscore.string/dist/underscore.string.min.js"></script>
+        <script src="bower_components/moment/min/moment.min.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
         <!-- build:js scripts/options.js -->
+        <script src="scripts/globals.js"></script>
         <script src="scripts/options.js"></script>
+        <script src="scripts/services/backlog.js"></script>
+        <script src="scripts/controllers/options/options.js"></script>
         <!-- endbuild -->
     </body>
 </html>
