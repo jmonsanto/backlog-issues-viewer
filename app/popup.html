@@ -15,7 +15,7 @@
         <section>
             {{ (issues | filter:internalFilter).length }} <ng-pluralize count="(issues | filter:internalFilter).length" when="{'one': 'issue.', 'other': 'issues.'}"></ng-pluralize>&nbsp;
             <input type="text" placeholder="Filter" ng-model="internalFilter" />&nbsp;
-            <a ng-click="openOptionsPage()">Setting</a>
+            <a href="#" ng-click="openOptionsPage()">Setting</a>
         </section>
         <section>
             <table class="issues table table-bordered">

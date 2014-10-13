@@ -14,16 +14,22 @@
         <h1>IssuesViewer For Backlog Options</h1>
         <section>
             <h2>Authentication</h2>
-            <p>
-                <label for="spaceKey">Space:</label>&nbsp;https://<input id="spaceKey" type="text" ng-model="auth.spaceKey" />.backlog.jp
-            </p>
-            <p>
-                <label for="apiKey">API Key:</label>&nbsp;<input id="apiKey" type="text" ng-model="auth.apiKey" />&nbsp;
-                <a href="http://www.backlog.jp/help/usersguide/personal-settings/userguide2378.html" target="_blank">About API Key</a>
-            </p>
-            <p>
-                <button class="btn btn-sm btn-default" ng-click="saveAuth()">Save</button>&nbsp;<span>{{ messages.saveAuth }}</span>
-            </p>
+            <table class="table table-bordered">
+                <tr>
+                    <th>Space</th>
+                    <td>
+                        https://<input type="text" ng-model="auth.spaceKey" size="10"/>.backlog.jp
+                    </td>
+                </tr>
+                <tr>
+                    <th>API Key</th>
+                    <td>
+                        <input type="text" ng-model="auth.apiKey" size="80" />&nbsp;
+                        <a href="http://www.backlog.jp/help/usersguide/personal-settings/userguide2378.html" target="_blank">About API Key</a>
+                    </td>
+                </tr>
+            </table>
+            <button class="btn btn-sm btn-default" ng-click="saveAuth()">Save</button>&nbsp;<span>{{ messages.saveAuth }}</span>
         </section>
         <hr />
         <section>
@@ -31,7 +37,7 @@
             <table class="table table-bordered">
                 <tbody>
                 <tr>
-                    <th>Projects&nbsp;<a ng-show="myself.id" ng-click="getProjects()">Update</a></th>
+                    <th>Projects</th>
                 </tr>
                 <tr>
                     <td>
@@ -42,6 +48,7 @@
                                    ng-checked="conditions.projectIds.indexOf(project.id) > -1"
                                    ng-click="toggleProjects(project.id)" />
                         </span>
+                        <p><a href="#" ng-show="myself.id" ng-click="getProjects()">Update Projects</a></p>
                     </td>
                 </tr>
                 </tbody>
@@ -58,7 +65,7 @@
                         <label for="withClosed">With closed issues</label>
                         <input id="withClosed" type="checkbox" ng-model="conditions.withClosed" ng-value="1" ng-checked="conditions.withClosed" />
                         <label for="showDaysForClosed">Show closed issues</label>
-                        <input id="showDaysForClosed" type="text" ng-model="conditions.showDaysForClosed" />days
+                        <input id="showDaysForClosed" type="text" ng-model="conditions.showDaysForClosed" size="1" />days
                     </td>
                 </tr>
                 </tbody>
