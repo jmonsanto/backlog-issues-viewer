@@ -4,44 +4,61 @@ angular.module('OptionsApp')
   .controller('OptionsCtrl', ['$scope', 'Backlog', '$timeout', function ($scope, Backlog, $timeout) {
     var self = this;
 
+    // values for authentication
     $scope.auth = angular.copy(Globals.auth);
 
+    // authentication user's Backlog data
     $scope.myself = {};
 
+    // Backlog projects
     $scope.projects = [];
 
+    // values for conditions
     $scope.conditions = angular.copy(Globals.conditions);
 
-    $scope.message = {};
+    // messages for options page
+    $scope.messages = {};
 
+    /**
+     * save values for authentication to chrome storage
+     */
     $scope.saveAuth = function () {
       Backlog.getMySelf($scope.auth).then(function (response) {
         chrome.storage.sync.set({auth: $scope.auth, myself: response}, self.sync);
         $scope.getProjects();
 
-        $scope.message.saveAuth = 'Saved!!';
-        $timeout(function () { $scope.message.saveAuth = '' }, 3000);
+        $scope.messages.saveAuth = 'Saved!!';
+        $timeout(function () { $scope.messages.saveAuth = ''; }, 3000);
       }).fail(function () {
         $scope.$apply(function () {
-          $scope.message.saveAuth = 'Error!! Invalid Space or API Key.';
-          $timeout(function () { $scope.message.saveAuth = '' }, 3000);
+          $scope.messages.saveAuth = 'Error!! Invalid Space or API Key.';
+          $timeout(function () { $scope.messages.saveAuth = ''; }, 3000);
         });
       });
     };
 
+    /**
+     * save values for conditions to chrome storage
+     */
     $scope.saveConditions = function () {
       chrome.storage.sync.set({conditions: $scope.conditions}, self.sync);
 
-      $scope.message.saveConditions = 'Saved!!';
-      $timeout(function () { $scope.message.saveConditions = '' }, 3000);
+      $scope.messages.saveConditions = 'Saved!!';
+      $timeout(function () { $scope.messages.saveConditions = ''; }, 3000);
     };
 
+    /**
+     * get Backlog projects
+     */
     $scope.getProjects = function () {
       Backlog.getProjects($scope.auth).then(function (response) {
         chrome.storage.sync.set({projects: response}, self.sync);
       });
-    }
+    };
 
+    /**
+     * @param {number} projectId
+     */
     $scope.toggleProjects = function (projectId) {
       var idx = $scope.conditions.projectIds.indexOf(projectId);
 
@@ -52,6 +69,9 @@ angular.module('OptionsApp')
       }
     };
 
+    /**
+     * sync with chrome storage
+     */
     self.sync = function () {
       var params = {auth: Globals.auth, projects: [], conditions: Globals.conditions, myself: {}};
 
@@ -67,6 +87,7 @@ angular.module('OptionsApp')
       Globals.getIssues();
     };
 
+    // initialize
     (function () {
       self.sync();
     })();
