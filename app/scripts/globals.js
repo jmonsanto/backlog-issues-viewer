@@ -13,7 +13,7 @@ var Globals = {
     projectIds: [],
     onlyMyIssues: 1,
     withClosed: 0,
-    showDaysForClosed: 3
+    showDaysForClosed: 1
   },
 
   // interval for updating issues
