@@ -12,7 +12,7 @@
     </head>
     <body ng-controller="OptionsCtrl">
         <h1>IssuesViewer For Backlog Options</h1>
-        <div>
+        <section>
             <h2>Authentication</h2>
             <p>
                 <label for="spaceKey">Space:</label>&nbsp;https://<input id="spaceKey" type="text" ng-model="auth.spaceKey" />.backlog.jp
@@ -24,9 +24,9 @@
             <p>
                 <button class="btn btn-sm btn-default" ng-click="saveAuth()">Save</button>&nbsp;<span>{{ message.saveAuth }}</span>
             </p>
-        </div>
+        </section>
         <hr />
-        <div>
+        <section>
             <h2>Filter</h2>
             <table class="table table-bordered">
                 <tbody>
@@ -64,7 +64,7 @@
                 </tbody>
             </table>
             <button class="btn btn-sm btn-default" ng-click="saveConditions()">Save</button>&nbsp;<span>{{ message.saveConditions }}</span>
-        </div>
+        </section>
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
         <script src="bower_components/jquery/dist/jquery.min.js"></script>
