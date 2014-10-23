@@ -21,6 +21,14 @@ angular.module('Services', [])
     };
 
     /**
+     * @param auth
+     * @returns {object}
+     */
+    self.getNotifications = function (auth) {
+      return call(auth, 'notifications/count', {alreadyRead: false});
+    };
+
+    /**
      * @param {object} auth
      * @param {string} method
      * @param {object} options

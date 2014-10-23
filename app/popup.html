@@ -15,6 +15,9 @@
         <section>
             {{ (issues | filter:internalFilter).length }} <ng-pluralize count="(issues | filter:internalFilter).length" when="{'one': 'issue.', 'other': 'issues.'}"></ng-pluralize>&nbsp;
             <input type="text" placeholder="Filter" ng-model="internalFilter" />&nbsp;
+            <a ng-href="https://{{ auth.spaceKey }}.backlog.jp" target="_blank">
+                {{ notificationsCount }} <ng-pluralize count="notificationsCount" when="{'one': 'notification.', 'other': 'notifications.'}"></ng-pluralize>
+            </a>&nbsp;
             <a href="#" ng-click="openOptionsPage()">Setting</a>
         </section>
         <section>
@@ -43,8 +46,10 @@
         </section>
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
         <script src="bower_components/angular/angular.min.js"></script>
         <script src="bower_components/underscore/underscore-min.js"></script>
+        <script src="bower_components/underscore.string/dist/underscore.string.min.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
@@ -52,6 +57,7 @@
         <script src="scripts/globals.js"></script>
         <script src="scripts/popup.js"></script>
         <script src="scripts/filters/truncate.js"></script>
+        <script src="scripts/services/backlog.js"></script>
         <script src="scripts/controllers/popup.js"></script>
         <!-- endbuild -->
     </body>

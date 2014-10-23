@@ -1,4 +1,4 @@
 'use strict';
 
 angular
-  .module('PopupApp', ['Filters']);
+  .module('PopupApp', ['Filters', 'Services']);
