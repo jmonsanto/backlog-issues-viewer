@@ -13,6 +13,13 @@
     <body ng-controller="OptionsCtrl">
         <h1>IssuesViewer For Backlog Options</h1>
         <section>
+            <h2>Accounts</h2>
+            <ul>
+                <li ng-repeat="account in accounts">
+                    <a href="" ng-click="changeAccount(account.myself.id)">{{ account.auth.spaceKey }}</a>&nbsp;
+                    <a href="" ng-click="removeAccount(account.myself.id)">remove</a>
+                </li>
+            </ul>
             <h2>Authentication</h2>
             <table class="table table-bordered">
                 <tr>
