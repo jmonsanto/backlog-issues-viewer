@@ -13,6 +13,7 @@
     </head>
     <body ng-controller="PopupCtrl">
         <section>
+            {{ currentDate | date:'yyyy-MM-dd' }} -&nbsp;
             {{ (issues | filter:internalFilter).length }} <ng-pluralize count="(issues | filter:internalFilter).length" when="{'one': 'issue.', 'other': 'issues.'}"></ng-pluralize>&nbsp;
             <input type="text" placeholder="Filter" ng-model="internalFilter" />&nbsp;
             <a ng-href="https://{{ auth.spaceKey }}.backlog.jp" target="_blank">
@@ -37,7 +38,7 @@
                 <tr ng-repeat="issue in issues | filter:internalFilter" ng-class="{over: issue._over, hover: hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false">
                     <td>{{ issue._project.name | truncate:15 }}</td>
                     <td>{{ issue.status.name }}</td>
-                    <td>{{ issue.limitDate | date:'yy-MM-dd' }}</td>
+                    <td>{{ issue.dueDate | date:'yy-MM-dd' }}</td>
                     <td>{{ issue.assignee.name }}</td>
                     <td><a ng-href="{{ issue._permalink }}" target="_blank">{{ issue.summary | truncate:25 }}</td>
                     <td>{{ join(issue.category, 'name') | truncate:15 }}</td>

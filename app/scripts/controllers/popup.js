@@ -13,6 +13,9 @@ angular.module('PopupApp')
     // Backlog notifications count
     $scope.notificationsCount = 0;
 
+    // current date
+    $scope.currentDate = new Date();
+
     /**
      * open chrome extension options page
      */
